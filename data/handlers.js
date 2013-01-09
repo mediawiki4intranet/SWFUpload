@@ -119,7 +119,7 @@ function uploadSuccess(file, serverData) {
 		{
 			progress.setError();
 			if (serverData.substr(0, 4) == 'msg-')
-				progress.setStatus(swfupload_lang[serverData.substr(4)]);
+				progress.setStatus(swfupload_lang[serverData.substr(4)].replace(': $1', ''));
 			else
 				progress.setStatus(swfupload_lang['upload-error'].replace('$1', serverData));
 		}

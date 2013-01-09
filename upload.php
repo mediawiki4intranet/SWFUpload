@@ -44,8 +44,8 @@ if ($_POST['cookies'])
     $ob = ob_get_contents();
     ob_end_clean();
     print "m";
-    if (preg_match('#<span[^<>]*class=["\']error[^<>]*>(.*?)</span>#is', $ob, $m))
-        echo trim($m[1]);
+    if (preg_match('#<(span|div)[^<>]*class=["\']error[^<>]*>(.*?)</\1>#is', $ob, $m))
+        echo trim($m[2]);
     elseif ($ob)
     {
         echo "msg-unknown-error";

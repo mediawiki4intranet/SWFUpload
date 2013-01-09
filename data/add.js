@@ -3,7 +3,7 @@ window.onload = function() {
 	upload1 = new SWFUpload({
 		// Backend Settings
 		upload_url: swfupload_path + "upload.php?wpSourceType=file&wpIgnoreWarning=true",
-		post_params: {"wpUpload" : "Upload file", "cookies" : swfupload_cookies, "wpUploadDescription" : ""},
+		post_params: {"wpUpload" : "Upload file", "cookies" : swfupload_cookies, "wpUploadDescription" : "", "wpEditToken" : swfupload_token},
 		http_success : [ 302 ],
 
 		// File Upload Settings

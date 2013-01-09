@@ -31,6 +31,7 @@ class SpecialSWFUpload extends SpecialPage
     {
         parent::__construct('SWFUpload', 'upload');
     }
+
     public function execute($par)
     {
         global $wgScriptPath, $wgJsMimeType, $wgOut, $swfuploadJsMessageKeys, $wgUser;
@@ -55,7 +56,8 @@ class SpecialSWFUpload extends SpecialPage
         $wgOut->addScript("<script type=\"$wgJsMimeType\" language=\"JavaScript\">
 var swfupload_path = \"".addslashes($path)."\";
 var swfupload_cookies = \"$cook\";
-var swfupload_lang = {" . join(", ", $vars) . "};
+var swfupload_lang = {".join(", ", $vars)."};
+var swfupload_token = \"".addslashes($wgUser->getEditToken())."\";
 </script>");
         foreach (array('swfupload.js', 'swfupload.queue.js', 'fileprogress.js', 'handlers.js', 'add.js') as $a)
             $wgOut->addScript(Xml::element('script', array('type' => $wgJsMimeType, 'src' => $path . 'data/' . $a), '', false));
