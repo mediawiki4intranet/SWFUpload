@@ -10,7 +10,7 @@
 function fileQueued(file) {
 	try {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus(swfupload_lang['pending']);
+		progress.setStatus(mw.msg('swfu-pending'));
 		progress.toggleCancel(true, this);
 
 	} catch (ex) {
@@ -27,7 +27,7 @@ function swfuploadFormatNum(msgid, num) {
 		msgid += '-1';
 	else
 		msgid += '-0';
-	return swfupload_lang[msgid].replace('$1', message);
+	return mw.msg('swfu-'+msgid, message);
 }
 
 function fileQueueError(file, errorCode, message) {
@@ -43,20 +43,20 @@ function fileQueueError(file, errorCode, message) {
 
 		switch (errorCode) {
 		case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-			progress.setStatus(swfupload_lang['file-too-big']);
+			progress.setStatus(mw.msg('swfu-file-too-big'));
 			this.debug("Error Code: File too big, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-			progress.setStatus(swfupload_lang['file-empty']);
+			progress.setStatus(mw.msg('swfu-file-empty'));
 			this.debug("Error Code: Zero byte file, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
-			progress.setStatus(swfupload_lang['invalid-filetype']);
+			progress.setStatus(mw.msg('swfu-invalid-filetype'));
 			this.debug("Error Code: Invalid File Type, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		default:
 			if (file !== null)
-				progress.setStatus(swfupload_lang['unknown-error'].replace('$1', message));
+				progress.setStatus(mw.msg('swfu-unknown-error', message));
 			this.debug("Error Code: " + errorCode + ", File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		}
@@ -86,7 +86,7 @@ function uploadStart(file) {
 		we can do is say we are uploading.
 		 */
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		progress.setStatus(swfupload_lang['uploading']);
+		progress.setStatus(mw.msg('swfu-uploading'));
 		progress.toggleCancel(true, this);
 	}
 	catch (ex) {}
@@ -100,7 +100,7 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
 		progress.setProgress(percent);
-		progress.setStatus(swfupload_lang['uploading']);
+		progress.setStatus(mw.msg('swfu-uploading'));
 	} catch (ex) {
 		this.debug(ex);
 	}
@@ -113,15 +113,15 @@ function uploadSuccess(file, serverData) {
 		if (!serverData || serverData == '')
 		{
 			progress.setComplete();
-			progress.setStatus(swfupload_lang['finished']);
+			progress.setStatus(mw.msg('swfu-finished'));
 		}
 		else
 		{
 			progress.setError();
 			if (serverData.substr(0, 4) == 'msg-')
-				progress.setStatus(swfupload_lang[serverData.substr(4)].replace(': $1', ''));
+				progress.setStatus(mw.msg('swfu-'+serverData.substr(4)).replace(': $1', ''));
 			else
-				progress.setStatus(swfupload_lang['upload-error'].replace('$1', serverData));
+				progress.setStatus(mw.msg('swfu-upload-error', serverData));
 		}
 		progress.toggleCancel(false);
 	} catch (ex) {
@@ -137,27 +137,27 @@ function uploadError(file, errorCode, message) {
 
 		switch (errorCode) {
 		case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
-			progress.setStatus(swfupload_lang['upload-error-http'].replace('$1', message));
+			progress.setStatus(mw.msg('swfu-upload-error-http', message));
 			this.debug("Error Code: HTTP Error, File name: " + file.name + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
-			progress.setStatus(swfupload_lang['upload-error'].replace('$1', message));
+			progress.setStatus(mw.msg('swfu-upload-error', message));
 			this.debug("Error Code: Upload Failed, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.IO_ERROR:
-			progress.setStatus(swfupload_lang['io-error']);
+			progress.setStatus(mw.msg('swfu-io-error'));
 			this.debug("Error Code: IO Error, File name: " + file.name + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
-			progress.setStatus(swfupload_lang['security-error']);
+			progress.setStatus(mw.msg('swfu-security-error'));
 			this.debug("Error Code: Security Error, File name: " + file.name + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
-			progress.setStatus(swfupload_lang['too-many-files']);
+			progress.setStatus(mw.msg('swfu-too-many-files'));
 			this.debug("Error Code: Upload Limit Exceeded, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
-			progress.setStatus(swfupload_lang['validation-error']);
+			progress.setStatus(mw.msg('swfu-validation-error'));
 			this.debug("Error Code: File Validation Failed, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
@@ -165,14 +165,14 @@ function uploadError(file, errorCode, message) {
 			if (this.getStats().files_queued === 0) {
 				document.getElementById(this.customSettings.cancelButtonId).disabled = true;
 			}
-			progress.setStatus(swfupload_lang['cancelled']);
+			progress.setStatus(mw.msg('swfu-cancelled'));
 			progress.setCancelled();
 			break;
 		case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
-			progress.setStatus(swfupload_lang['stopped']);
+			progress.setStatus(mw.msg('swfu-stopped'));
 			break;
 		default:
-			progress.setStatus(swfupload_lang['unknown-error'].replace('$1', errorCode));
+			progress.setStatus(mw.msg('swfu-unknown-error', errorCode));
 			this.debug("Error Code: " + errorCode + ", File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
 			break;
 		}

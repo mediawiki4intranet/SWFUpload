@@ -28,7 +28,7 @@ if ($_POST['cookies'])
     $name = $_FILES['wpUploadFile']['name'];
     $name = trim($name, " \t\n\r\x0B\"\'\0");
     $name = preg_replace("#.*[/\\\\]#is", '', $name);
-    $name = $_REQUEST['swfuploadNamePrefix'] . $name;
+    $name = @$_REQUEST['swfuploadNamePrefix'] . $name;
     $_GET['wpDestFile'] = $name;
     $_COOKIE = unserialize($_POST['cookies']);
     $args = array();

@@ -44,14 +44,6 @@ class SpecialSWFUpload extends SpecialPage
         $path = $wgScriptPath . '/extensions/SWFUpload/';
         $cook = addslashes(serialize($_COOKIE));
         $vars = array();
-        foreach (explode(' ',
-            'allfiles pending uploading finished cancelled upload-stopped queue-limit-exceeded-0 queue-limit-exceeded-1 queue-limit-exceeded-2 '.
-            'queue-limit-exceeded-5 file-too-big file-empty invalid-filetype unknown-error upload-error-http upload-error io-error security-error ' .
-            'too-many-files validation-error num-files-uploaded-5 num-files-uploaded-2 num-files-uploaded-1 num-files-uploaded-0') as $k)
-        {
-            // Pass localisation messages to JS
-            $vars[] = "'$k' : \"".str_replace("\n", "\\n", addslashes(wfMsg("swfupload-js-$k")))."\"";
-        }
         $wgOut->setPageTitle(wfMsg('swfupload-title'));
         $wgOut->addScript("<script type=\"$wgJsMimeType\" language=\"JavaScript\">
 var swfupload_path = \"".addslashes($path)."\";
@@ -59,13 +51,7 @@ var swfupload_cookies = \"$cook\";
 var swfupload_lang = {".join(", ", $vars)."};
 var swfupload_token = \"".addslashes($wgUser->getEditToken())."\";
 </script>");
-        foreach (array('swfupload.js', 'swfupload.queue.js', 'fileprogress.js', 'handlers.js', 'add.js') as $a)
-            $wgOut->addScript(Xml::element('script', array('type' => $wgJsMimeType, 'src' => $path . 'data/' . $a), '', false));
-        $wgOut->addLink(array(
-            'rel'  => 'stylesheet',
-            'type' => 'text/css',
-            'href' => $path . 'data/swfupload.css',
-        ));
+        $wgOut->addModules('ext.SWFUpload');
         $msg_comment = wfMsg('swfupload-comment');
         $msg_name_prefix = wfMsg('swfupload-filename-prefix');
         $msg_select_file = wfMsg('swfupload-select-file');

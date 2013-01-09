@@ -9,7 +9,7 @@ window.onload = function() {
 		// File Upload Settings
 		file_size_limit : "0",
 		file_types : "*.*",
-		file_types_description : swfupload_lang['allfiles'],
+		file_types_description : mw.msg('swfu-allfiles'),
 		file_upload_limit : "0",
 		file_queue_limit : "0",
 		file_post_name : "wpUploadFile",
