@@ -38,10 +38,10 @@ SpecialPage::setGroup('SWFUpload', 'media');
 $wgExtensionCredits['specialpage'][] = array(
     'path'        => __FILE__,
     'name'        => 'SWFUpload',
-    'version'     => '0.96 (2011-09-22)',
+    'version'     => '1.0 (2013-01-09)',
     'author'      => 'Vitaliy Filippov',
     'url'         => 'http://wiki.4intra.net/SWFUpload_(MediaWiki)',
-    'description' => 'Flash applet support for uploading files into MediaWiki',
+    'description' => 'Flash applet support for uploading multiple files into MediaWiki',
 );
 
 $wgResourceModules['ext.SWFUpload'] = array(

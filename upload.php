@@ -1,7 +1,7 @@
 <?php
 /**
  * upload.php -- Simple PHP backend for using SWFUpload inside MediaWiki
- * Copyright 2009-2011 Vitaliy Filippov <vitalif@mail.ru>
+ * Copyright 2009-2013 Vitaliy Filippov <vitalif@mail.ru>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
