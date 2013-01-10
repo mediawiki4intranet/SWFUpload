@@ -15,10 +15,8 @@
 /* ******************* */
 /* Constructor & Init  */
 /* ******************* */
-var SWFUpload;
-
-if (SWFUpload == undefined) {
-	SWFUpload = function (settings) {
+if (window.SWFUpload == undefined) {
+	window.SWFUpload = function (settings) {
 		this.initSWFUpload(settings);
 	};
 }

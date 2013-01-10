@@ -43,12 +43,10 @@ class SpecialSWFUpload extends SpecialPage
         wfLoadExtensionMessages('SWFUpload');
         $path = $wgScriptPath . '/extensions/SWFUpload/';
         $cook = addslashes(serialize($_COOKIE));
-        $vars = array();
         $wgOut->setPageTitle(wfMsg('swfupload-title'));
         $wgOut->addScript("<script type=\"$wgJsMimeType\" language=\"JavaScript\">
 var swfupload_path = \"".addslashes($path)."\";
 var swfupload_cookies = \"$cook\";
-var swfupload_lang = {".join(", ", $vars)."};
 var swfupload_token = \"".addslashes($wgUser->getEditToken())."\";
 </script>");
         $wgOut->addModules('ext.SWFUpload');

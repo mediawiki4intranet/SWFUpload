@@ -24,8 +24,7 @@
 				    or as several numbers labeled with units (time)
 	*/
 
-var SWFUpload;
-if (typeof(SWFUpload) === "function") {
+if (typeof(window.SWFUpload) === "function") {
 	SWFUpload.speed = {};
 	
 	SWFUpload.prototype.initSettings = (function (oldInitSettings) {

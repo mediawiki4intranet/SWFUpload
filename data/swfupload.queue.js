@@ -11,8 +11,7 @@
 		
 	*/
 
-var SWFUpload;
-if (typeof(SWFUpload) === "function") {
+if (typeof(window.SWFUpload) === "function") {
 	SWFUpload.queue = {};
 	
 	SWFUpload.prototype.initSettings = (function (oldInitSettings) {

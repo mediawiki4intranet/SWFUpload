@@ -28,6 +28,9 @@
 // 2) Put the following into your LocalSettings.php:
 //    require_once "$IP/extensions/SWFUpload/SWFUpload.php";
 
+// NOTE: Included swfupload-*.js scripts are slightly changed to work
+// with MW ResourceLoader: 'var SWFUpload' is substituted for 'window.SWFUpload'
+
 $dir = dirname(__FILE__) . '/';
 $wgAutoloadClasses['SpecialSWFUpload'] = $dir . 'SWFUpload.body.php';
 $wgExtensionMessagesFiles['SWFUpload'] = $dir . 'SWFUpload.i18n.php';
@@ -38,7 +41,7 @@ SpecialPage::setGroup('SWFUpload', 'media');
 $wgExtensionCredits['specialpage'][] = array(
     'path'        => __FILE__,
     'name'        => 'SWFUpload',
-    'version'     => '1.0 (2013-01-09)',
+    'version'     => '1.01 (2013-01-10)',
     'author'      => 'Vitaliy Filippov',
     'url'         => 'http://wiki.4intra.net/SWFUpload_(MediaWiki)',
     'description' => 'Flash applet support for uploading multiple files into MediaWiki',
