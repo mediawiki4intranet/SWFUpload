@@ -43,18 +43,19 @@ class SpecialSWFUpload extends SpecialPage
         wfLoadExtensionMessages('SWFUpload');
         $path = $wgScriptPath . '/extensions/SWFUpload/';
         $cook = addslashes(serialize($_COOKIE));
+        $def_prefix = date('Y-m-d-');
         $wgOut->setPageTitle(wfMsg('swfupload-title'));
         $wgOut->addScript("<script type=\"$wgJsMimeType\" language=\"JavaScript\">
 var swfupload_path = \"".addslashes($path)."\";
 var swfupload_cookies = \"$cook\";
 var swfupload_token = \"".addslashes($wgUser->getEditToken())."\";
+var swfupload_prefix= \"".addslashes($def_prefix)."\";
 </script>");
         $wgOut->addModules('ext.SWFUpload');
         $msg_comment = wfMsg('swfupload-comment');
         $msg_name_prefix = wfMsg('swfupload-filename-prefix');
         $msg_select_file = wfMsg('swfupload-select-file');
         $msg_cancel = wfMsg('swfupload-cancelbtn');
-        $def_prefix = date('Y-m-d-');
         $def_category = wfmsg('swfupload-def-category', date('Y-m-d'));
         $wgOut->addHTML(wfMsgExt('swfupload-page-text', 'parse'));
         $wgOut->addHTML(<<<EOF
