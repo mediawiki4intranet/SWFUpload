@@ -22,7 +22,7 @@
  * @author Vitaliy Filippov <vitalif@mail.ru>
  */
 
-if(!defined('MEDIAWIKI'))
+if (!defined('MEDIAWIKI'))
     exit(1);
 
 class SpecialSWFUpload extends SpecialPage
@@ -49,7 +49,7 @@ class SpecialSWFUpload extends SpecialPage
 var swfupload_path = \"".addslashes($path)."\";
 var swfupload_cookies = \"$cook\";
 var swfupload_token = \"".addslashes($wgUser->getEditToken())."\";
-var swfupload_prefix= \"".addslashes($def_prefix)."\";
+var swfupload_prefix = \"".addslashes($def_prefix)."\";
 </script>");
         $wgOut->addModules('ext.SWFUpload');
         $msg_comment = wfMsg('swfupload-comment');
@@ -61,7 +61,7 @@ var swfupload_prefix= \"".addslashes($def_prefix)."\";
         $wgOut->addHTML(<<<EOF
 <table>
     <tr><td colspan="2">$msg_comment</td></tr>
-    <tr><td colspan="2"><textarea style="width:100%" onchange="upload1.addPostParam('wpUploadDescription', this.value)" cols="30" rows="3">$def_category</textarea></td></tr>
+    <tr><td colspan="2"><textarea id="swfuploadDescription" style="width:100%" onchange="upload1.addPostParam('text', this.value)" cols="30" rows="3">$def_category</textarea></td></tr>
     <tr><td>$msg_name_prefix</td><td><input type="text" style="width:100%" onchange="upload1.addPostParam('swfuploadNamePrefix', this.value)" value="$def_prefix" /></td></tr>
     <tr><td colspan="2" align="right">$msg_select_file <span id="spanButtonPlaceholder1"></span> <input id="btnCancel1" type="button" value="$msg_cancel" onclick="upload1.cancelQueue();" disabled="disabled" style="width: 61px; margin: 0 0 0 2px; padding: 0; height: 22px; font-size: 8pt;" /></td></tr>
 </table>

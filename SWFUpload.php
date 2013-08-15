@@ -41,7 +41,7 @@ SpecialPage::setGroup('SWFUpload', 'media');
 $wgExtensionCredits['specialpage'][] = array(
     'path'        => __FILE__,
     'name'        => 'SWFUpload',
-    'version'     => '1.01 (2013-01-10)',
+    'version'     => '1.02 (2013-08-15)',
     'author'      => 'Vitaliy Filippov',
     'url'         => 'http://wiki.4intra.net/SWFUpload_(MediaWiki)',
     'description' => 'Flash applet support for uploading multiple files into MediaWiki',
@@ -85,3 +85,11 @@ $wgResourceModules['ext.SWFUpload'] = array(
     'localBasePath' => __DIR__,
     'remoteExtPath' => 'SWFUpload',
 );
+
+if (defined('MW_API') && isset($_REQUEST['action']) && $_REQUEST['action'] === 'upload' &&
+    isset($_REQUEST['swfuploadNamePrefix']) && isset($_FILES['file']) &&
+    isset($_REQUEST['swfuploadCookies']))
+{
+    $_COOKIE = unserialize($_POST['swfuploadCookies']);
+    $_POST['filename'] = $_REQUEST['filename'] = $_REQUEST['swfuploadNamePrefix'].$_REQUEST['Filename'];
+}

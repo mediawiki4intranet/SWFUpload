@@ -109,19 +109,20 @@ function uploadProgress(file, bytesLoaded, bytesTotal) {
 function uploadSuccess(file, serverData) {
 	try {
 		var progress = new FileProgress(file, this.customSettings.progressTarget);
-		serverData = serverData.substr(1);
-		if (!serverData || serverData == '')
-		{
-			progress.setComplete();
-			progress.setStatus(mw.msg('swfu-finished'));
-		}
-		else
-		{
+		var serverData;
+		try {
+			serverData = $.parseJSON(serverData);
+			if (serverData.error) {
+				progress.setError();
+				progress.setStatus(mw.msg('swfu-upload-error', serverData.error.info));
+			} else {
+				progress.setComplete();
+				progress.setStatus(mw.msg('swfu-finished'));
+			}
+			console.log(serverData);
+		} catch (e) {
 			progress.setError();
-			if (serverData.substr(0, 4) == 'msg-')
-				progress.setStatus(mw.msg('swfu-'+serverData.substr(4)).replace(': $1', ''));
-			else
-				progress.setStatus(mw.msg('swfu-upload-error', serverData));
+			progress.setStatus(mw.msg('swfu-upload-error', serverData));
 		}
 		progress.toggleCancel(false);
 	} catch (ex) {
