@@ -40,7 +40,6 @@ class SpecialSWFUpload extends SpecialPage
             $this->displayRestrictionError();
             return;
         }
-        wfLoadExtensionMessages('SWFUpload');
         $path = $wgScriptPath . '/extensions/SWFUpload/';
         $cook = addslashes(serialize($_COOKIE));
         $def_prefix = date('Y-m-d-');
