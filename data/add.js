@@ -1,6 +1,5 @@
-var upload1;
 window.onload = function() {
-	upload1 = new SWFUpload({
+	window.upload1 = new SWFUpload({
 		// Backend Settings
 		upload_url: mw.util.wikiScript('api')+'?action=upload&format=json',
 		post_params: {
