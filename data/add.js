@@ -5,7 +5,7 @@ window.onload = function() {
 		post_params: {
 			'token': swfupload_token,
 			'ignorewarnings': 1,
-			'swfuploadNamePrefix': swfupload_prefix,
+			'swfuploadNamePrefix': document.getElementById('swfuploadNamePrefix').value,
 			'swfuploadCookies': swfupload_cookies,
 			'text': document.getElementById('swfuploadDescription').value
 		},

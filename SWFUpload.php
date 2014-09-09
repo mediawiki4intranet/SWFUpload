@@ -87,8 +87,7 @@ $wgResourceModules['ext.SWFUpload'] = array(
 );
 
 if (defined('MW_API') && isset($_REQUEST['action']) && $_REQUEST['action'] === 'upload' &&
-    isset($_REQUEST['swfuploadNamePrefix']) && isset($_FILES['file']) &&
-    isset($_REQUEST['swfuploadCookies']))
+    isset($_FILES['file']) && isset($_REQUEST['swfuploadCookies']))
 {
     $_COOKIE = unserialize($_POST['swfuploadCookies']);
     $_POST['filename'] = $_REQUEST['filename'] = $_REQUEST['swfuploadNamePrefix'].$_REQUEST['Filename'];
